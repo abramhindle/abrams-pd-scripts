@@ -19,7 +19,8 @@ The instruments in here are:
 * ctrl-midi1.pd -- an attempt to understand the BCS2000 midi controller 
 * sines.pdf.pd -- Use all 32 knobs of the BCS2000 midi controller or your mouse to set the coeffecients in a sinewave.
   * this one is pretty complicated because I had to form complicated messages to send around to generate the sine table. What's great about it is that I don't use 32 sine oscillators to make it! 
-  * ![sine.pd.pd](images/sines.pdf.pd "sines.pdf.pd")
+  * ![sine.pdf.pd](https://raw.githubusercontent.com/abramhindle/abrams-pd-scripts/master/images/sines.pdf.pd.png "sines.pdf.pd")
+  * ![sine.pdf.pd](images/sines.pdf.pd "sines.pdf.pd")
 
 
 LICENSE
