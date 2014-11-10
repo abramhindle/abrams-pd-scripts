@@ -1,0 +1,169 @@
+#N canvas 889 112 1017 888 10;
+#X obj 400 5 gemhead;
+#X floatatom 426 132 0 0 0 0 - - -;
+#X obj 350 237 cube;
+#X obj 381 169 translateXYZ;
+#X obj 197 179 gemhead 1;
+#X obj 185 233 translateXYZ;
+#X obj 171 291 light;
+#X floatatom 262 204 5 0 0 0 - - -;
+#X obj 374 42 vsl 15 128 0 20 0 0 empty empty empty 0 -9 0 10 -204786
+-1 -1 0 1;
+#X obj 351 521 world_light;
+#X obj 219 383 gemhead 1;
+#X obj 455 89 rotateXYZ 26 26 0;
+#X floatatom 485 36 0 0 0 0 - - -;
+#X floatatom 553 37 5 0 0 0 - - -;
+#X obj 589 227 gemhead;
+#X obj 594 451 sphere;
+#X floatatom 657 300 5 0 0 0 - - -;
+#X obj 647 27 vsl 15 128 0 20 0 0 empty empty empty 0 -9 0 10 -204786
+-1 -1 2200 1;
+#X obj 493 342 rotateXYZ 26 26 0;
+#X floatatom 538 242 5 0 0 0 - - -;
+#X floatatom 538 168 5 0 0 0 - - -;
+#X obj 456 281 translateXYZ;
+#X obj 695 261 translateXYZ;
+#X obj 601 189 * -1;
+#N canvas 1 96 450 300 (subpatch) 0;
+#X array array1 100 float 1;
+#A 0 31.1722 42.7437 54.3152 58.601 62.8867 67.1724 71.4582 75.7439
+80.0296 83.1725 86.3154 89.4582 92.6011 95.744 98.8869 102.03 105.173
+108.315 111.401 114.487 117.573 120.658 123.744 126.83 129.916 133.001
+136.087 139.173 141.744 144.316 146.887 149.459 152.03 154.601 157.173
+159.744 162.316 164.887 167.459 170.459 173.459 176.459 179.459 182.459
+185.459 188.459 191.459 194.459 197.459 200.459 203.459 205.832 208.206
+210.58 212.953 215.327 217.701 220.074 222.448 224.822 227.195 229.569
+231.942 234.316 236.888 239.459 242.03 244.602 247.173 249.745 252.316
+254.888 257.459 260.031 262.602 265.173 267.745 270.316 272.888 275.459
+278.031 280.602 283.174 285.745 288.316 290.888 293.459 296.031 298.602
+301.174 303.745 306.316 308.888 311.459 314.031 316.602 319.174 321.745
+324.317 378.317;
+#X coords 0 360 99 0 200 140 1 0 0;
+#X restore 142 -36 graph;
+#X obj 79 137 phasor~ 0.6;
+#X floatatom 95 85 5 0 0 0 - - -;
+#X obj 82 166 *~ 100;
+#X floatatom 47 250 0 0 0 0 - - -;
+#X obj 57 210 tabread~ array1;
+#X obj 90 242 snapshot~;
+#X obj 76 325 *~;
+#X obj 87 413 dac~;
+#X obj 144 301 vsl 15 40 0 1 0 0 empty empty empty 0 -9 0 10 -261682
+-1 -1 300 1;
+#X obj 137 179 metro 30;
+#X obj 263 146 loadbang;
+#X floatatom 301 262 5 0 0 0 - - -;
+#X obj 141 113 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 111 278 osc~;
+#X obj 425 208 colorRGB;
+#X obj 395 356 colorRGB;
+#X obj 396 252 / 360;
+#X obj 458 -55 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 145 369 cos~;
+#X obj 304 454 translateXYZ -1 -1 -1;
+#X obj 244 410 rotateXYZ 12 54 20;
+#X obj 28 -137 cnv 15 220 70 empty empty empty 20 12 0 14 -195568 -66577
+0;
+#N canvas 0 22 454 304 gemwin 0;
+#X obj 132 136 gemwin;
+#X obj 67 89 outlet;
+#X obj 67 10 inlet;
+#X obj 67 41 route create;
+#X msg 67 70 set destroy;
+#X msg 182 68 set create;
+#X msg 132 112 create \, 1;
+#X msg 238 112 destroy;
+#N canvas 87 154 247 179 Gem.init 0;
+#X obj 59 26 loadbang;
+#X msg 118 81 reset;
+#X obj 118 113 outlet;
+#X obj 59 45 t b b;
+#X msg 51 75 lighting 1;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 3 1 1 0;
+#X connect 4 0 2 0;
+#X restore 289 80 pd Gem.init;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 6 0;
+#X connect 3 1 5 0;
+#X connect 3 1 7 0;
+#X connect 4 0 1 0;
+#X connect 5 0 1 0;
+#X connect 6 0 0 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X restore 33 -93 pd gemwin;
+#X msg 62 -118 destroy;
+#X text 29 -137 Create window and render;
+#X obj 155 487 gemhead;
+#X obj 155 509 world_light;
+#X msg 539 139 1;
+#X connect 0 0 11 0;
+#X connect 1 0 3 1;
+#X connect 1 0 3 2;
+#X connect 1 0 3 3;
+#X connect 3 0 39 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 7 0 5 1;
+#X connect 7 0 5 2;
+#X connect 7 0 5 3;
+#X connect 8 0 2 1;
+#X connect 10 0 45 0;
+#X connect 11 0 3 0;
+#X connect 12 0 11 1;
+#X connect 12 0 11 2;
+#X connect 13 0 11 3;
+#X connect 14 0 18 0;
+#X connect 14 0 21 0;
+#X connect 14 0 22 0;
+#X connect 16 0 15 2;
+#X connect 17 0 15 1;
+#X connect 18 0 40 0;
+#X connect 19 0 18 3;
+#X connect 20 0 21 1;
+#X connect 20 0 21 2;
+#X connect 20 0 21 3;
+#X connect 20 0 23 0;
+#X connect 21 0 18 0;
+#X connect 22 0 18 0;
+#X connect 23 0 22 1;
+#X connect 23 0 22 2;
+#X connect 23 0 22 3;
+#X connect 25 0 27 0;
+#X connect 26 0 25 0;
+#X connect 27 0 29 0;
+#X connect 29 0 30 0;
+#X connect 29 0 38 0;
+#X connect 30 0 18 1;
+#X connect 30 0 18 2;
+#X connect 30 0 36 0;
+#X connect 31 0 32 0;
+#X connect 31 0 43 0;
+#X connect 33 0 31 1;
+#X connect 34 0 30 0;
+#X connect 35 0 34 0;
+#X connect 36 0 39 1;
+#X connect 36 0 39 3;
+#X connect 36 0 40 3;
+#X connect 36 0 40 4;
+#X connect 36 0 41 0;
+#X connect 37 0 34 0;
+#X connect 38 0 31 0;
+#X connect 39 0 2 0;
+#X connect 40 0 15 0;
+#X connect 41 0 40 2;
+#X connect 42 0 0 0;
+#X connect 43 0 32 1;
+#X connect 44 0 9 0;
+#X connect 45 0 44 0;
+#X connect 47 0 48 0;
+#X connect 48 0 47 0;
+#X connect 50 0 51 0;
+#X connect 52 0 20 0;
