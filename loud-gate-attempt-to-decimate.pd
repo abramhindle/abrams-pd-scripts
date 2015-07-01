@@ -1,0 +1,216 @@
+#N canvas 833 177 933 810 10;
+#X obj 128 -41 adc~;
+#X obj 125 464 dac~;
+#X obj 223 152 vsl 15 128 1 100 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 800 1;
+#X obj 177 276 wrap~;
+#X obj 126 271 -~;
+#X obj 126 424 *~;
+#X obj 188 400 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 12400 1;
+#X obj 127 227 *~ 8;
+#X obj 125 307 /~ 8;
+#X obj 57 24 vsl 15 128 1 32 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 400 1;
+#N canvas 1437 511 450 379 gate 0;
+#X obj 171 49 env~;
+#X obj 172 169 vline~;
+#X obj 168 89 >;
+#X obj 78 -11 inlet~;
+#X obj 96 256 outlet~;
+#X obj 234 -13 inlet;
+#X obj 108 190 *~;
+#X obj 170 125 pack 0 200;
+#X connect 0 0 2 0;
+#X connect 1 0 6 1;
+#X connect 2 0 7 0;
+#X connect 3 0 0 0;
+#X connect 3 0 6 0;
+#X connect 5 0 2 1;
+#X connect 6 0 4 0;
+#X connect 7 0 1 0;
+#X restore 126 336 pd gate;
+#X obj 126 195 *~ 1;
+#X obj 126 367 lores~ 500 0.75;
+#X obj 187 322 hsl 128 15 20 1000 1 0 empty empty empty -2 -8 0 10
+-262144 -1 -1 11500 1;
+#N canvas 81 209 844 712 pitchshift 0;
+#X floatatom 29 97 0 0 0 0 - - -;
+#X obj 92 368 *~;
+#X obj 215 305 line~;
+#X floatatom 247 122 0 0 0 0 - - -;
+#X text 78 19 PITCH SHIFTER;
+#X obj 215 279 pack 0 200;
+#X obj 247 96 r window;
+#X obj 29 153 exp;
+#X floatatom 29 179 6 0 0 0 - - -;
+#X obj 29 269 /;
+#X obj 156 199 * 0.001;
+#X obj 324 375 line~;
+#X obj 324 350 pack 0 200;
+#X floatatom 324 299 0 0 0 0 - - -;
+#X obj 324 273 r delay;
+#X obj 92 394 +~;
+#X obj 29 420 cos~;
+#X obj 29 447 *~;
+#X obj 38 481 +~;
+#X obj 116 327 wrap~;
+#X obj 261 370 *~;
+#X obj 261 403 +~;
+#X obj 198 430 cos~;
+#X obj 198 457 *~;
+#X msg 502 66 \; transpose 0 \; window 100 \; delay 0;
+#X obj 502 40 loadbang;
+#X obj 156 226 t b f;
+#X floatatom 30 297 6 0 0 0 - - -;
+#X obj 116 300 +~ 0.5;
+#X obj 29 368 -~ 0.5;
+#X obj 29 394 *~ 0.5;
+#X obj 198 369 -~ 0.5;
+#X obj 198 402 *~ 0.5;
+#X obj 29 206 - 1;
+#X obj 29 127 * 0.05776;
+#X obj 29 232 * -1;
+#X text 63 96 <-- transposition;
+#X text 106 109 (halftones);
+#X text 92 173 speed;
+#X text 91 187 change;
+#X text 291 121 <--window (msec);
+#X text 64 262 tape head;
+#X text 435 163 This is a classic rotating-tape-head style pitch shifter
+using the vd~ variable delay object. Ther are two moving tape heads
+\, each of which is loudest at the middle of its trajectory \, and
+enveloped out at the moment it has to jump back (or forward) to start
+another scratch. Most of the brain work is in computing how fast the
+tape heads have to move to get the desired transposition.;
+#X text 435 282 The "window size" is the total trajectory of the read
+points in the delay line \, in milliseconds. The delay times are controlled
+by a phasor~ object. The second delay time \, 180 degrees out of phase
+from the first one \, is computed using the "wrap" object.;
+#X text 433 372 The "window size" is the total trajectory of the read
+points in the delay line \, in milliseconds. The delay times are controlled
+by a phasor~ object. The second delay time \, 180 degrees out of phase
+from the first one \, is computed using the "wrap" object.;
+#X text 432 464 The cos~ objects compute the fadein and fadeout of
+the two delay line outputs. They each traverse the positive half of
+the cosine waveform (phase -0.25 to +0.25) over the time the phase
+goes from one end to the other.;
+#X obj 29 326 phasor~;
+#X text 699 544 updated for Pd version 0.37-1;
+#X obj 324 326 max 1.5;
+#X text 327 232 delay;
+#X text 324 250 (msec);
+#X obj 247 149 max 1;
+#X text 65 275 rotation freq;
+#X obj 92 420 vd~ G09-del;
+#X obj 261 432 vd~ G09-del;
+#X obj 274 52 delwrite~ G09-del 5000;
+#X obj 270 7 inlet~;
+#X obj 49 522 outlet~;
+#X obj 374 11 inlet;
+#X connect 0 0 34 0;
+#X connect 1 0 15 0;
+#X connect 2 0 1 1;
+#X connect 2 0 20 1;
+#X connect 3 0 51 0;
+#X connect 5 0 2 0;
+#X connect 6 0 3 0;
+#X connect 7 0 8 0;
+#X connect 8 0 33 0;
+#X connect 9 0 27 0;
+#X connect 10 0 26 0;
+#X connect 11 0 15 1;
+#X connect 11 0 21 1;
+#X connect 12 0 11 0;
+#X connect 13 0 48 0;
+#X connect 14 0 13 0;
+#X connect 15 0 53 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 57 0;
+#X connect 19 0 20 0;
+#X connect 19 0 31 0;
+#X connect 20 0 21 0;
+#X connect 21 0 54 0;
+#X connect 22 0 23 0;
+#X connect 23 0 18 1;
+#X connect 25 0 24 0;
+#X connect 26 0 9 0;
+#X connect 26 1 9 1;
+#X connect 27 0 46 0;
+#X connect 28 0 19 0;
+#X connect 29 0 30 0;
+#X connect 30 0 16 0;
+#X connect 31 0 32 0;
+#X connect 32 0 22 0;
+#X connect 33 0 35 0;
+#X connect 34 0 7 0;
+#X connect 35 0 9 0;
+#X connect 46 0 1 0;
+#X connect 46 0 29 0;
+#X connect 46 0 28 0;
+#X connect 48 0 12 0;
+#X connect 51 0 10 0;
+#X connect 51 0 5 0;
+#X connect 53 0 17 1;
+#X connect 54 0 23 1;
+#X connect 56 0 55 0;
+#X connect 58 0 0 0;
+#X restore 127 85 pd pitchshift;
+#X obj 173 123 hsl 128 15 -12 12 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 7600 1;
+#X msg 185 -18 \; delay 0 \; window 120;
+#X obj 126 398 +~;
+#X obj 472 108 hsl 128 15 -12 12 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 1400 1;
+#X obj 387 129 pitchshift;
+#X obj 387 260 freeverb~;
+#X msg 451 155 \; roomsize 0.99 \; dry 0.1 \; damping 0.01 \; wet 0.9
+;
+#X obj 403 5 delread~ inputfeed;
+#X obj 387 319 delwrite~ inputfeed;
+#X obj 509 -161 vsl 15 128 20 2000 1 0 empty empty empty 0 -9 0 10
+-262144 -1 -1 12700 1;
+#X obj 403 182 *~;
+#X obj 620 53 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 3100 1;
+#X obj 387 213 +~;
+#X text 103 -97 Channel 1: Revelations Channel 2: Microphone;
+#X text 39 1 Decimation;
+#X text 205 102 Revelations Pitch;
+#X text 476 -182 Delay Time;
+#X text 595 26 delay mix;
+#X connect 0 0 14 0;
+#X connect 0 1 19 0;
+#X connect 2 0 10 1;
+#X connect 3 0 4 1;
+#X connect 4 0 8 0;
+#X connect 5 0 1 0;
+#X connect 5 0 1 1;
+#X connect 6 0 5 1;
+#X connect 7 0 3 0;
+#X connect 7 0 4 0;
+#X connect 8 0 10 0;
+#X connect 9 0 7 1;
+#X connect 9 0 8 1;
+#X connect 10 0 12 0;
+#X connect 11 0 7 0;
+#X connect 12 0 17 0;
+#X connect 13 0 12 1;
+#X connect 14 0 11 0;
+#X connect 15 0 14 1;
+#X connect 16 0 14 0;
+#X connect 17 0 5 0;
+#X connect 18 0 19 1;
+#X connect 19 0 27 0;
+#X connect 20 0 17 1;
+#X connect 20 0 23 0;
+#X connect 20 1 17 1;
+#X connect 20 1 23 0;
+#X connect 21 0 20 0;
+#X connect 22 0 25 0;
+#X connect 24 0 22 0;
+#X connect 25 0 27 1;
+#X connect 26 0 25 1;
+#X connect 27 0 20 0;
+#X connect 27 0 20 1;
