@@ -1,4 +1,4 @@
-#N canvas 917 289 826 633 10;
+#N canvas 1019 203 826 633 10;
 #X floatatom 39 107 0 0 0 0 - - -;
 #X obj 102 378 *~;
 #X obj 225 315 line~;
@@ -69,9 +69,9 @@ goes from one end to the other.;
 #X obj 280 17 inlet~;
 #X obj 59 532 outlet~;
 #X obj 384 21 inlet;
-#X obj 284 61 delwrite~ $G09-del 5000;
-#X obj 271 442 vd~ $G09-del;
-#X obj 102 430 vd~ $G09-del;
+#X obj 284 61 delwrite~ \$0Gab-del 5000;
+#X obj 271 442 vd~ \$0Gab-del;
+#X obj 102 430 vd~ \$0Gab-del;
 #X connect 0 0 34 0;
 #X connect 1 0 15 0;
 #X connect 2 0 1 1;
