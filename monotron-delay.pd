@@ -1,0 +1,259 @@
+#N canvas 686 129 1126 786 10;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array seeit1 100 float 3;
+#A 0 0.401582 0.388696 0.371857 0.351876 0.332634 0.310742 0.286745
+0.261074 0.234073 0.206014 0.177115 0.147558 0.117469 0.0869552 0.0561478
+0.025064 -0.00623938 -0.0377173 -0.069334 -0.101061 -0.132876 -0.16476
+-0.196699 -0.228683 -0.260701 -0.292746 -0.324814 -0.356899 -0.388999
+-0.421109 -0.453228 -0.485355 -0.517486 -0.549623 -0.581762 -0.613904
+-0.400497 -0.23747 -0.114487 0.0346722 0.146632 0.229026 0.30162 0.352905
+0.387073 0.407635 0.417382 0.418533 0.412851 0.402503 0.387682 0.369305
+0.351339 0.330462 0.307272 0.282244 0.255754 0.228102 0.199528 0.170229
+0.140346 0.109997 0.0793212 0.0483427 0.0171237 -0.0142865 -0.0458486
+-0.0775314 -0.10931 -0.141165 -0.173081 -0.205045 -0.237046 -0.269078
+-0.301134 -0.33321 -0.3653 -0.397403 -0.429516 -0.461636 -0.493762
+-0.525893 -0.558028 -0.590166 -0.622306 -0.408896 -0.245866 -0.0648759
+0.0723856 0.188592 0.274361 0.33612 0.378613 0.405792 0.420799 0.426131
+0.423774 0.416069 0.403349 0.386643;
+#X coords 0 2 99 -2 200 140 1 0 0;
+#X restore 275 32 graph;
+#X obj 276 640 tabwrite~ seeit1;
+#X obj 281 563 loadbang;
+#X obj 277 536 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 278 597 metro 10;
+#N canvas 632 483 450 300 VCO 1;
+#X obj 129 76 phasor~;
+#X obj 130 184 *~ -1;
+#X obj 130 131 -~ 0.5;
+#X obj 129 29 inlet~;
+#X obj 130 247 outlet~;
+#X obj 130 212 *~;
+#X obj 183 28 inlet~;
+#X connect 0 0 2 0;
+#X connect 1 0 5 0;
+#X connect 2 0 1 0;
+#X connect 3 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 5 1;
+#X restore 443 447 pd VCO;
+#N canvas 1213 584 450 300 VCF 0;
+#X obj 78 43 inlet~;
+#X obj 76 117 outlet~;
+#X obj 147 44 inlet;
+#X obj 77 82 lop~;
+#X connect 0 0 3 0;
+#X connect 2 0 3 1;
+#X connect 3 0 1 0;
+#X restore 444 530 pd VCF;
+#N canvas 1362 658 450 300 DELAY 0;
+#X obj 79 47 inlet~;
+#X obj 122 47 inlet;
+#X obj 160 47 inlet;
+#X obj 95 261 outlet~;
+#X obj 95 199 +~;
+#X obj 95 230 delwrite~ DELAY 4000;
+#X obj 95 168 *~;
+#X obj 95 137 delread~ DELAY 0;
+#X obj 160 78 sig~ 0;
+#X connect 0 0 4 0;
+#X connect 1 0 7 0;
+#X connect 2 0 8 0;
+#X connect 4 0 3 0;
+#X connect 4 0 5 0;
+#X connect 6 0 4 1;
+#X connect 7 0 6 0;
+#X connect 8 0 6 1;
+#X restore 445 577 pd DELAY;
+#X obj 510 540 r time;
+#X obj 562 539 r feedback;
+#X obj 522 16 loadbang;
+#X obj 522 83 s time 0;
+#X obj 593 86 s feedback 0;
+#X obj 522 -6 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 486 497 r cutoff;
+#N canvas 1314 535 450 300 LFO 1;
+#X obj 51 25 inlet;
+#X obj 110 28 inlet;
+#X obj 51 223 *~;
+#X obj 162 30 inlet;
+#X obj 51 142 triangle~;
+#X obj 51 75 sig~;
+#X obj 52 112 phasor~;
+#X obj 101 76 sig~ 0.5;
+#X obj 166 170 blosc~ comparator;
+#X obj 166 142 -~ 0.5;
+#X obj 186 66 - 1;
+#X obj 132 205 *~;
+#X obj 56 187 *~;
+#X obj 52 261 outlet~;
+#X connect 0 0 5 0;
+#X connect 1 0 2 1;
+#X connect 2 0 13 0;
+#X connect 3 0 10 0;
+#X connect 3 0 12 1;
+#X connect 4 0 12 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 6 0 9 0;
+#X connect 7 0 4 1;
+#X connect 8 0 11 0;
+#X connect 9 0 8 0;
+#X connect 10 0 11 1;
+#X connect 11 0 2 0;
+#X connect 12 0 2 0;
+#X restore 444 379 pd LFO;
+#X obj 444 413 +~;
+#X obj 491 379 r pitch;
+#X obj 444 347 r rate;
+#X obj 494 346 r intensity;
+#X obj 515 319 r switch;
+#X obj 681 84 s rate 0;
+#X obj 533 56 0;
+#X obj 519 114 s pitch 0;
+#X obj 589 113 s switch 0;
+#X obj 448 658 dac~;
+#X floatatom 613 329 5 0 0 0 - - -;
+#X floatatom 613 357 5 0 0 0 - - -;
+#X floatatom 609 386 5 0 0 0 - - -;
+#X floatatom 605 417 5 0 0 0 - - -;
+#X floatatom 600 517 5 0 0 0 - - -;
+#X obj 676 112 s cutoff 0;
+#X floatatom 541 575 5 0 0 0 - - -;
+#X floatatom 590 579 5 0 0 0 - - -;
+#X obj 667 244 hsl 128 15 0 1440 0 0 empty empty Pitch -2 -8 0 10 -262144
+-1 -1 8105 0;
+#X obj 667 274 hsl 128 15 0.01 1440 1 0 empty empty LFO_Rate -2 -8
+0 10 -262144 -1 -1 5700 0;
+#X obj 666 308 hsl 128 15 0.01 300 1 0 empty empty Intensity -2 -8
+0 10 -262144 -1 -1 9700 1;
+#X obj 665 340 hsl 128 15 0 1 0 0 empty empty Switch -2 -8 0 10 -262144
+-1 -1 5900 1;
+#X obj 808 259 s pitch;
+#X obj 808 289 s rate;
+#X obj 806 323 s intensity;
+#X obj 814 355 s switch;
+#X obj 664 371 hsl 128 15 20 1440 1 0 empty empty cutoff -2 -8 0 10
+-262144 -1 -1 12700 1;
+#X obj 487 421 r enable;
+#X obj 764 58 1;
+#X obj 764 82 s enable;
+#X obj 815 386 s cutoff;
+#X obj 664 407 hsl 128 15 0 4000 0 0 empty empty time -2 -8 0 10 -262144
+-1 -1 500 0;
+#X obj 815 422 s time;
+#X obj 665 442 hsl 128 15 0 1.2 0 0 empty empty feedback -2 -8 0 10
+-262144 -1 -1 2500 0;
+#X obj 816 457 s feedback;
+#X obj 447 629 clip~ -1.1 1.1;
+#X obj 446 606 *~;
+#X obj 665 474 hsl 128 15 0 2 0 0 empty empty volume -2 -8 0 10 -262144
+-1 -1 7600 1;
+#X obj 816 489 s volume;
+#X obj 500 590 r volume;
+#X obj 765 110 s volume;
+#X msg 524 192 1 100;
+#X msg 573 225 0 1000;
+#X obj 514 250 line~;
+#X obj 574 180 delay 1000;
+#X obj 552 138 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 284 217 Kinda a Korg Monotron delay;
+#N canvas 0 83 450 300 (subpatch) 0;
+#X array notes 100 float 3;
+#A 0 933.177 1003.89 1003.89 1003.89 1003.89 1003.89 1003.89 1003.89
+1003.89 1003.89 1000.35 996.819 993.283 989.748 986.212 982.676 979.141
+975.605 971.564 967.524 963.483 959.442 955.401 951.361 947.32 943.784
+940.249 936.713 933.177 929.642 926.106 922.57 919.035 919.035 919.035
+919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035
+919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035
+919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035
+919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035 919.035
+919.035 919.035 919.035 919.035 921.055 923.075 925.096 927.116 929.137
+931.157 933.177 933.177 933.177 933.177 933.177 933.177 933.177 937.218
+941.259 945.299 949.34 953.381 957.422 961.462 961.462 961.462 961.462
+961.462 961.462;
+#X coords 0 2000 100 20 200 140 1 0 0;
+#X restore 45 312 graph;
+#X obj 86 194 phasor~;
+#X obj 90 221 *~ 100;
+#X obj 87 248 tabread~ notes;
+#X obj 95 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X floatatom 203 271 5 0 0 0 - - -;
+#X obj 194 231 snapshot~;
+#X obj 166 162 sig~;
+#X floatatom 159 111 5 0 0 0 - - -;
+#X obj 200 197 metro 100;
+#X msg 88 159 0.01;
+#X obj 17 240 snapshot~;
+#X floatatom 16 273 5 0 0 0 - - -;
+#X obj 48 29 vsl 15 128 0.01 6 1 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 4900 1;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 52 0;
+#X connect 8 0 7 1;
+#X connect 8 0 32 0;
+#X connect 9 0 7 2;
+#X connect 9 0 33 0;
+#X connect 10 0 22 0;
+#X connect 10 0 44 0;
+#X connect 13 0 10 0;
+#X connect 14 0 6 1;
+#X connect 14 0 30 0;
+#X connect 15 0 16 0;
+#X connect 16 0 5 0;
+#X connect 17 0 16 1;
+#X connect 17 0 29 0;
+#X connect 18 0 15 0;
+#X connect 18 0 27 0;
+#X connect 19 0 15 1;
+#X connect 19 0 28 0;
+#X connect 20 0 15 2;
+#X connect 20 0 26 0;
+#X connect 22 0 11 0;
+#X connect 22 0 12 0;
+#X connect 22 0 21 0;
+#X connect 22 0 23 0;
+#X connect 22 0 24 0;
+#X connect 22 0 31 0;
+#X connect 34 0 38 0;
+#X connect 35 0 39 0;
+#X connect 36 0 40 0;
+#X connect 37 0 41 0;
+#X connect 42 0 46 0;
+#X connect 44 0 45 0;
+#X connect 44 0 56 0;
+#X connect 47 0 48 0;
+#X connect 49 0 50 0;
+#X connect 51 0 25 0;
+#X connect 51 0 25 1;
+#X connect 52 0 51 0;
+#X connect 52 0 1 0;
+#X connect 53 0 54 0;
+#X connect 55 0 52 1;
+#X connect 57 0 59 0;
+#X connect 58 0 59 0;
+#X connect 59 0 5 1;
+#X connect 60 0 58 0;
+#X connect 61 0 57 0;
+#X connect 61 0 60 0;
+#X connect 64 0 65 0;
+#X connect 65 0 66 0;
+#X connect 66 0 69 0;
+#X connect 67 0 73 0;
+#X connect 67 0 72 0;
+#X connect 69 0 68 0;
+#X connect 70 0 64 0;
+#X connect 71 0 70 0;
+#X connect 72 0 69 0;
+#X connect 72 0 74 0;
+#X connect 73 0 64 0;
+#X connect 73 0 70 0;
+#X connect 74 0 75 0;
+#X connect 76 0 71 0;

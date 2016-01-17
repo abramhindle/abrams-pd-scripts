@@ -1,0 +1,39 @@
+#N canvas 419 226 517 645 10;
+#X declare -lib mrpeach;
+#X obj 151 412 dac~;
+#X obj 62 50 polytron;
+#X obj 277 50 polytron;
+#X obj 186 -196 import mrpeach;
+#X obj 192 -149 udpreceive 57120;
+#X obj 193 -97 unpackOSC;
+#X floatatom 193 -20 5 0 0 0 - - -;
+#X floatatom 245 -20 5 0 0 0 - - -;
+#X obj 193 -46 t f b;
+#X obj 245 -46 t f b;
+#X obj 193 -69 routeOSC /1/x /1/y;
+#X obj 193 4 *;
+#X obj 245 4 *;
+#X obj 117 -168 vsl 15 128 20 1760 0 0 empty empty empty 0 -9 0 10
+-262144 -1 -1 11500 1;
+#X obj 146 -166 vsl 15 128 20 1760 1 0 empty empty empty 0 -9 0 10
+-262144 -1 -1 11800 1;
+#X obj 41 -185 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 1600 1;
+#X obj 69 -186 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 1700 1;
+#X connect 1 0 0 0;
+#X connect 2 0 0 1;
+#X connect 4 0 5 0;
+#X connect 5 0 10 0;
+#X connect 6 0 11 0;
+#X connect 7 0 12 0;
+#X connect 8 0 6 0;
+#X connect 9 0 7 0;
+#X connect 10 0 8 0;
+#X connect 10 1 9 0;
+#X connect 11 0 1 0;
+#X connect 12 0 2 0;
+#X connect 13 0 11 1;
+#X connect 14 0 12 1;
+#X connect 15 0 8 0;
+#X connect 16 0 9 0;
